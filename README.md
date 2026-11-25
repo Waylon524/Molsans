@@ -1,52 +1,54 @@
-# MolSans
+# Molsans
 
-MolSans is a Latin sans-serif typeface designed for [MolStage](https://molstage.com/), a stage for interactive biology animations. Its double-arch capital M, angled lowercase l, and rounded joins are drawn to sit comfortably beside scientific illustrations.
+Molsans is a Latin sans-serif typeface designed for [Molstage](https://molstage.com/en/). Its double-arch M, curved lowercase l, and rounded joins give it a quiet signature alongside scientific illustrations.
 
-MolSans 是为 MolStage 设计的拉丁无衬线字体。v1.1 提供 Regular 字重、基础英文字母、等宽数字、完整 ASCII 标点和常用排版及数学符号。字体不含中文；中英混排时可以搭配原版 Noto Sans SC，仓库不分发中文字体。
+Molsans 是为 Molstage 设计的拉丁无衬线字体。v1.2 提供 Regular、Medium 和 Bold 三个独立字重，覆盖 113 个字符，包括英文字母、等宽数字、完整 ASCII 标点和常用排版及数学符号。字体不含中文；中英混排时可另配开源中文字体。
 
-![MolSans specimen](docs/specimen.png)
+![Molsans v1.2 specimen: Regular, Medium and Bold](docs/specimen-v1.2.png)
+
+[Online specimen and font details / 在线样张](https://molstage.com/molsans)
 
 ## Download
 
-- [MolSans Regular TTF](dist/MolSans-Regular.ttf) for desktop installation.
-- [MolSans Regular WOFF2](dist/MolSans-Regular.woff2) for websites.
-- [GitHub releases](https://github.com/Waylon524/MolSans/releases) for versioned downloads.
+| Style | Weight | Desktop | Web |
+| --- | ---: | --- | --- |
+| Regular | 400 | [TTF](dist/Molsans-Regular.ttf) | [WOFF2](dist/Molsans-Regular.woff2) |
+| Medium | 500 | [TTF](dist/Molsans-Medium.ttf) | [WOFF2](dist/Molsans-Medium.woff2) |
+| Bold | 700 | [TTF](dist/Molsans-Bold.ttf) | [WOFF2](dist/Molsans-Bold.woff2) |
 
-## New in v1.1
+[Versioned downloads and ZIP archive](https://github.com/Waylon524/Molsans/releases)
 
-- Added 32 punctuation characters and symbols. Coverage now includes every ASCII punctuation character, plus curly quotes, en and em dashes, ellipsis, bullet, multiplication, and more.
-- Refined spacing after `f` before rounded letters, between facing vertical stems, and in narrow curve-to-stem or curve-to-curve pairs such as `DI`, `OR`, and `ge`.
-- Strengthened the center stem of `$` and extended the right ends of both crossbars in `#`.
+## New in v1.2
 
-See the [punctuation specimen](docs/punctuation-v1.1.png) and [spacing comparison](docs/spacing-v1.1.png).
+- The name is now **Molsans**.
+- **Regular** retains the v1.1 contours. **Medium** is the slightly heavier face introduced on Molstage. **Bold** uses genuinely heavier outlines and slightly wider spacing for brand wordmarks. None relies on synthetic bold.
+- All three keep the additional breathing room in `ut`, `dt`, `rt`, `tt`, and related crossbar pairs, alongside the kerning and punctuation improvements introduced in v1.1.
 
 ## Contextual M
 
-The taller double-arch M is the default. If the next character is a lowercase ASCII letter, the font uses the original, slightly shorter M. The two forms share the same advance width and baseline. For example, `Molecular` and `Molish` use the shorter form, while `MOLSTAGE`, `M2`, `M A`, and a standalone `M` use the taller one.
-
-This is implemented with OpenType contextual alternates (`calt`). If an application does not support or disables the feature, it will show the taller M everywhere.
+Before a lowercase ASCII letter, M uses the shorter of its two double-arch shapes. The taller M is the default in all other positions, including before capitals, digits or spaces, and on its own. Both forms share the same baseline and advance within each weight. This uses OpenType contextual alternates (`calt`); if disabled, only the taller M appears.
 
 ## Web use
 
-Download the WOFF2 and serve it with your site.
+Host the WOFF2 files and declare each static weight separately. For example:
 
 ```css
 @font-face {
-  font-family: "MolSans";
-  src: url("./MolSans-Regular.woff2") format("woff2");
+  font-family: "Molsans";
+  src: url("./Molsans-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
-.title {
-  font-family: "MolSans", "Noto Sans SC", system-ui, sans-serif;
+body {
+  font-family: "Molsans", "Noto Sans SC", system-ui, sans-serif;
   font-variant-ligatures: contextual;
 }
 ```
 
 ## Build from source
 
-Build on macOS with the Xcode command-line tools and Python 3. The vector construction lives in [source/build.py](source/build.py); the Swift helpers use Core Graphics to create and normalize contours.
+Use macOS, the Xcode command-line tools, and Python 3. The vector design lives in [source/build.py](source/build.py); [source/family.py](source/family.py) applies the final spacing, weights and font metadata. The Swift helpers use Core Graphics.
 
 ```sh
 python3 -m venv .venv
@@ -58,4 +60,4 @@ python tests/verify.py
 
 ## License
 
-The font files, source, and repository material are released under the [MIT License](LICENSE).
+The fonts and repository material are released under the [MIT License](LICENSE).

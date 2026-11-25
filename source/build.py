@@ -360,7 +360,7 @@ font.setupNameTable({
     'typographicFamily': 'MolSans',
     'typographicSubfamily': 'Regular',
     'licenseDescription': 'Licensed under the MIT License.',
-    'licenseInfoURL': 'https://github.com/Waylon524/MolSans/blob/main/LICENSE',
+    'licenseInfoURL': 'https://github.com/Waylon524/Molsans/blob/main/LICENSE',
 })
 font.setupOS2(version=4,sTypoAscender=900,sTypoDescender=-235,sTypoLineGap=0,usWinAscent=900,usWinDescent=235,usWeightClass=400,fsType=0,achVendID="MOLS",sxHeight=525,sCapHeight=720,fsSelection=192)
 font.setupPost()
@@ -1236,16 +1236,16 @@ lowercase=' '.join('abcdefghijklmnopqrstuvwxyz')
 features='languagesystem DFLT dflt; languagesystem latn dflt;\n'+features
 features+=f"\n@lower = [{lowercase}]; feature calt {{ sub M' @lower by M.low; }} calt;"
 addOpenTypeFeaturesFromString(font.font,features)
-out_dir=pathlib.Path(__file__).resolve().parent.parent/'dist'
-out_dir.mkdir(exist_ok=True)
-# Use fixed timestamps so rebuilding does not update the release metadata.
-font.font.recalcTimestamp=False
-font.font['head'].created=3878323200
-font.font['head'].modified=3878323200
-ttf=out_dir/'MolSans-Regular.ttf'
-font.save(ttf)
-checked=TTFont(ttf,recalcTimestamp=False)
-assert len(checked.getBestCmap())==len(data)
-checked.flavor='woff2'
-checked.save(out_dir/'MolSans-Regular.woff2')
-print('Built',ttf.name,'and MolSans-Regular.woff2')
+# Keep deterministic timestamps and derive the shipping family from this base.
+import tempfile
+from family import build_family
+out_dir = pathlib.Path(__file__).resolve().parent.parent / 'dist'
+font.font.recalcTimestamp = False
+font.font['head'].created = 3878323200
+font.font['head'].modified = 3878323200
+with tempfile.TemporaryDirectory(prefix='molsans-base-') as tmp:
+    ttf = pathlib.Path(tmp) / 'Molsans-base.ttf'
+    font.save(ttf)
+    checked = TTFont(ttf, recalcTimestamp=False)
+    assert len(checked.getBestCmap()) == len(data)
+    build_family(ttf, out_dir)

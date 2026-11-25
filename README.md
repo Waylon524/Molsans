@@ -2,15 +2,23 @@
 
 MolSans is a Latin sans-serif typeface designed for [MolStage](https://molstage.com/), a stage for interactive biology animations. Its double-arch capital M, angled lowercase l, and rounded joins are drawn to sit comfortably beside scientific illustrations.
 
-MolSans 是为 MolStage 设计的拉丁无衬线字体。v1.0 提供 Regular 字重、基础英文字母、等宽数字和部分标点。字体不含中文；中英混排时可以搭配原版 Noto Sans SC，仓库不分发中文字体。
+MolSans 是为 MolStage 设计的拉丁无衬线字体。v1.1 提供 Regular 字重、基础英文字母、等宽数字、完整 ASCII 标点和常用排版及数学符号。字体不含中文；中英混排时可以搭配原版 Noto Sans SC，仓库不分发中文字体。
 
-![MolSans v1.0 specimen](docs/specimen.png)
+![MolSans specimen](docs/specimen.png)
 
 ## Download
 
 - [MolSans Regular TTF](dist/MolSans-Regular.ttf) for desktop installation.
 - [MolSans Regular WOFF2](dist/MolSans-Regular.woff2) for websites.
 - [GitHub releases](https://github.com/Waylon524/MolSans/releases) for versioned downloads.
+
+## New in v1.1
+
+- Added 32 punctuation characters and symbols. Coverage now includes every ASCII punctuation character, plus curly quotes, en and em dashes, ellipsis, bullet, multiplication, and more.
+- Refined spacing after `f` before rounded letters, between facing vertical stems, and in narrow curve-to-stem or curve-to-curve pairs such as `DI`, `OR`, and `ge`.
+- Strengthened the center stem of `$` and extended the right ends of both crossbars in `#`.
+
+See the [punctuation specimen](docs/punctuation-v1.1.png) and [spacing comparison](docs/spacing-v1.1.png).
 
 ## Contextual M
 
